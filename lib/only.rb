@@ -1,26 +1,7 @@
+require 'only/base_constraint'
+require 'only/rails/routing.rb'
+
 module Only
-  class BaseConstraint
-    class << self
-      attr_accessor :request
-      
-      def matches?(request)
-        self.request = request
-        condition_matches?
-      end
-      
-      # Get the domain name from the request URL
-      def requested_domain
-        %r{//([^/]+)}.match(request.url)[1]
-      end
-      
-      def params(attribute = nil)
-        attribute ? request.params[attribute] : request.params
-      end
-    end
-  private
-    def new; end
-  end
-  
   class << self
     def constraints
       @constraints ||= {}
@@ -47,14 +28,6 @@ module Only
     def define(name, &match_proc)
       constraints[name] = Class.new(BaseConstraint)
       constraints[name].define_singleton_method :condition_matches?, match_proc
-    end
-  end
-end
-
-module ActionDispatch::Routing
-  class Mapper
-    def only(constraint_name, &block)
-      constraints Only.constraints[constraint_name], &block
     end
   end
 end
