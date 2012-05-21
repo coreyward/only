@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Corey Ward"]
   s.email       = ["corey.atx@gmail.com"]
   s.homepage    = "http://github.com/jonesdilworth/only"
-  s.summary     = "Define Rails route constraints easier"
+  s.summary     = "Define Rails route constraints with ease"
   s.description = "Only makes writing route constraints for Rails 3+ applications easier by providing a simple DSL and several helpers."
  
   s.required_rubygems_version = ">= 1.8"
